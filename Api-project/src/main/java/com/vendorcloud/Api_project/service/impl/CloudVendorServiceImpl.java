@@ -9,29 +9,33 @@ import java.util.List;
 public class CloudVendorServiceImpl implements CloudVendorService {
     CloudVendorRepository cloudVendorRepository;
 
+    public CloudVendorServiceImpl(CloudVendorRepository cloudVendorRepository) {
+        this.cloudVendorRepository = cloudVendorRepository;
+    }
+
     public String createCloudVendor(CloudVendor cloudVendor) {
-        this.cloudVendorRepository= cloudVendorRepository;
-        return null;
+        cloudVendorRepository.save(cloudVendor);
+        return "Successfully created Cloud Vendor";
     }
 
     @Override
     public String updateCloudVendor(CloudVendor cloudVendor) {
-        cloudVendor.setVendorId(String ven);
-        return "";
+        cloudVendorRepository.save(cloudVendor);
+        return "cloud vendor updated";
     }
 
     @Override
     public String deleteCloudVendor(String cloudVendorId) {
+        cloudVendorRepository.deleteById(cloudVendorId);
         return "";
     }
 
     @Override
     public CloudVendor getCloudVendor(String cloudVendorId) {
-        return null;
+        return cloudVendorRepository.findById(cloudVendorId).get();
     }
-
     @Override
     public List<CloudVendor> getAllCloudVendor() {
-        return List.of();
+        return (List<CloudVendor>) cloudVendorRepository.findAll();
     }
 }
